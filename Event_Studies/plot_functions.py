@@ -4,6 +4,8 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import matplotlib.ticker as mtick
 
+viridis_palet = ['#440154FF', '#481567FF', '#482677FF', '#453781FF', '#404788FF', '#39568CFF', '#33638DFF', '#2D708EFF', '#287D8EFF', '#238A8DFF', '#1F968BFF', '#20A387FF', '#29AF7FFF', '#3CBB75FF', '#55C667FF', '#73D055FF', '#95D840FF', '#B8DE29FF', '#DCE319FF', '#FDE725FF']
+
 def plot_price_X_period (X_asset, X_Nasdaq, Y_date, asset):
     """
     [Summary]:
@@ -69,7 +71,7 @@ def plot_residuals_dist(res, asset):
     plt.style.use('seaborn')
     plt.clf()
     plt.figure(figsize=(10, 7))
-    sns.distplot(res, color='#440154FF', label=asset)
+    sns.distplot(res, color='#8FD744FF', label=asset)
     plt.legend(labelspacing=0.8)
     plt.title("Residuals Distribution")
     plt.xlabel('Frequency')
