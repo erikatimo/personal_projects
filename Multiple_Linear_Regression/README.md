@@ -6,7 +6,7 @@ Created at: march/2022
 
 ## **Resumo**
 
-Regressão linear múltipla:
+Regressão linear múltipla de séries temporais:
 - **Variável dependente**: Índice Nasdaq-100 (^NDX)
 - **Variáveis independentes**: empresas que compõem o índice Nasdaq-100 e que interromperam completamente as suas atividades na Rússia (Withdrawal label), após a abertura do conflito com a Ucrânia. 
     - Airbnb (ABNB), 
@@ -49,3 +49,6 @@ A base resultante encontra-se no arquivo **companies.xlsx**
 
 ---
 ## **Resultados**
+
+### Passo 1 - Explorar a base de dados
+

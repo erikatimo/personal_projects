@@ -1,7 +1,7 @@
 """
     Created at: 2022-03-29
     Author: Erika Timo de Oliveira
-    Description: Multiple Linear Regression between Nasdaq Assets 
+    Description: Event-study Analysis
 """
 
 import numpy as np
