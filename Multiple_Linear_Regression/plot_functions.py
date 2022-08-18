@@ -3,27 +3,35 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import matplotlib.ticker as mtick
+from random import random
+import pdb
 
 viridis_palet = ['#440154FF', '#481567FF', '#482677FF', '#453781FF', '#404788FF', '#39568CFF', '#33638DFF', '#2D708EFF', '#287D8EFF', '#238A8DFF', '#1F968BFF', '#20A387FF', '#29AF7FFF', '#3CBB75FF', '#55C667FF', '#73D055FF', '#95D840FF', '#B8DE29FF', '#DCE319FF', '#FDE725FF']
 
-def plot_price_X_period (X_asset, X_Nasdaq, Y_date, asset):
+def plot_prices_X_period (Y_date, kwargs, name):
     """
     [Summary]:
     [Args]:
     [Returns]:
     """
+
+    viridis_palette = ['#440154FF', '#481567FF', '#482677FF', '#453781FF', '#404788FF', '#39568CFF', '#33638DFF', '#2D708EFF', '#287D8EFF', '#238A8DFF', '#1F968BFF', '#20A387FF', '#29AF7FFF', '#3CBB75FF', '#55C667FF', '#73D055FF', '#95D840FF', '#B8DE29FF', '#DCE319FF', '#FDE725FF']
+    palet_position = 0
     plt.style.use('seaborn')
-    plt.clf()
     plt.figure(figsize=(10, 7))
-    plt.plot(Y_date, X_asset, color='#440154FF', label=asset, linestyle='solid')
-    plt.plot(Y_date, X_Nasdaq/100, color='#2D708EFF', label='^NDX / 100', linestyle='solid')
+
+    for X in kwargs:
+        pdb.set_trace()
+        plt.plot(Y_date, kwargs[X], color=viridis_palette[palet_position], label=X, linestyle='solid')
+        palet_position = int(len(viridis_palet)*random())
+
     plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
     plt.gca().xaxis.set_major_locator(mdates.MonthLocator(interval=1))
     plt.legend(labelspacing=0.8)
     plt.title("Assets History")
     plt.xlabel('Period')
     plt.ylabel('Closing Price')
-    plt.savefig(f'.\plots\historical_prices_{asset}.png')
+    plt.savefig(f'.\plots\{name}.png')
 
 def plot_return_X_period (X_asset, X_Nasdaq, Y_date, asset):
     """

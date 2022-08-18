@@ -6,7 +6,10 @@ Created at: march/2022
 
 ## **Resumo**
 
-Regressão linear múltipla de séries temporais:
+O objetivo é estudar o modelo de regressão linear múltipla de séries temporais. 
+
+Exemplo: como a taxa de retorno de um ativo se comporta com relação ao mercado.
+
 - **Variável dependente**: Índice Nasdaq-100 (^NDX)
 - **Variáveis independentes**: empresas que compõem o índice Nasdaq-100 e que interromperam completamente as suas atividades na Rússia (Withdrawal label), após a abertura do conflito com a Ucrânia. 
     - Airbnb (ABNB), 
@@ -20,35 +23,44 @@ Regressão linear múltipla de séries temporais:
 - **Período contemplado**:
     - Primeira Janela: 30/01/2022 a 23/02/2022
     - Segunda Janela: 24/02/2022 a 20/03/2022
+- **Formatação do modelo**:
+$$ RI_{market} = f(R_{stock})$$ $$ ndx = \beta_0 + \beta_1abnb + \beta_2adsk + ... + \beta_8 nflx + \mu $$ Em que o termo de erro $\mu$ ou resíduo é a diferença entre o valor real e o valor previsto de Y.
+$$ \mu = Y - \^Y$$
+Além disso, duas condições devem ser respeitadas:
+    - O somatório dos resíduos deve ser igual a zero $$ \sum\mu = 0 $$
+    - O somatório dos quadrados dos resíduoes deve ser mínimo $$ \sum\mu^2 = min $$
 
 ---
 ## **Dataset**
 
-Inicialmente, foram consideradas à análise as empresas que fazem parte da composição do índice da Nasdaq, **Nasdaq-100**, obtidas através do [site](https://www.nasdaq.com/market-activity/quotes/nasdaq-ndx-index) da bolsa americana.
 
-Em seguida, o artigo da [Yale](https://som.yale.edu/story/2022/over-600-companies-have-withdrawn-russia-some-remain) foi utilizado para clusterizar este conjunto de empresas conforme a sua reação ao conflito Rússia-Ucrânia, iniciado em 24/2/2022.
+Jeffrey Sonnenfeld and his team of experts, research fellows, and students at the Yale Chief Executive Leadership Institute are continue updating a  [list](https://www.yalerussianbusinessretreat.com/) with the announcements of companies that are leaving or staying in Russia.
 
-As empresas foram segregadas nas seguintes categorias:
-- **Digging In**: empresas que continuam normalmente o seu modelo de negócio usual na Russia.
-- **Buying Time**: empresas que adiaram a execução de atividades relacionadas a novos investimentos ou marketing já planejadas, enquanto permanecem operando substancialmente.
-- **Scaling Back**: empresas que reduziram algumas operações de maneira significante, mas permanecem com outras.
-- **Suspension**: empresas que restringiram temporariamente a operação na Russia, mantendo a opção de retorno em aberto.
-- **Withdrawal**: empresas que interromperam completamente as atividades na Russia.
+The file **companies.xlsx** contains the database extracted for this study at august 4th, 2022.
 
-O cruzamento resultante foi:
-- **Digging In**: ALGN, JD, PCAR
-- **Buying Time**: AZN, IDXX, KHC, MAR, MDLZ
-- **Scaling Back**: MSFT, PEP
-- **Suspension**: AAPL, ADBE, ADI, ADP, AMZN, ANSS, COST, CSCO, FB, GOOG, GOOGL, HON, INTC, INTU, MRVL, MU, NVDA, PYPL, QCOM, SBUX, TEAM
-- **Withdrawal**: ABNB, ADSK, AMD, ATVI, BKNG, EBAY, FTNT, NFLX
-- **Not Applicable**: AEP, AMAT, AMGN, ASML, AVGO, BIDU, BIIB, CDNS, CEG, CHTR, CMCSA, CPRT, CRWD, CSX, CTAS, CTSH, DDOG, DLTR, DOCU, DXCM, EA, EXC, FAST, FISV, GILD, ILMN, ISRG, KDP, KLAC, LCID, LRCX, LULU, MCHP, MELI, MNST, MRNA, MTCH, NTES, NXPI, ODFL, OKTA, ORLY, PANW, PAYX, PDD, REGN, ROST, SGEN, SIRI, SNPS, SPLK, SWKS, TMUS, TSLA, TXN, VRSK, VRSN, VRTX, WBA, WDAY, XEL, ZM, ZS
+![Historical Returns](companies_clusters.webp)
 
-A label **Not Applicable** foi dado por mim para as empresas que fazem parte do grupo da Nasdaq, mas que não foram citadas no estudo de Yale.
+After the announcements of Russian attack to Ukraine and the consequent sanctions on the Russian economy, firms with operations in the country had to decide between stay or leave. 
 
-A base resultante encontra-se no arquivo **companies.xlsx**
+If a firm continue the operations as before, could lead with a negative image depending on the geopolitical economy side. The companie can also have problems with the cashflow local currency, due to Ruassian currency decrease. 
+
+If a firm decide to withdraw from Russia, there are hard consequences too, loosing costumers and investitors, through the interruption on the cashflow and long-term returns. This is a radical decision that can not be easily reveted. 
+
+A third possibility is to buy time and posptone a final decision to wait for the dust to settle. 
+
+Regarding this context, there are five categories of decision-making:
+- **Digging In**: companies that are just continuing business-as-usual in Russia;
+- **Buying Time**: companies postponing future planned investment/development/marketing while continuing substantive business;
+- **Scaling Back**: companies that are scaling back some significant business operations but continuing some others;
+- **Suspension**: companies temporarily curtailing most or nearly all operations while keeping return options open;
+- **Withdrawal**: companies totally halting Russian engagements or completely exiting Russia.
+
+
+
 
 ---
 ## **Resultados**
 
 ### Passo 1 - Explorar a base de dados
+
 
