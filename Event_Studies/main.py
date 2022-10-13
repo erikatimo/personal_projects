@@ -24,7 +24,7 @@ estimation_window = 30
 event_window_left = 5
 event_window_right = 10
 market_index = '^GSPC' #'^NDX'
-status = 'buying_time' # 'withdrawal' 'suspension' 'buying_time' 'scaling_back' 'digging_in' 
+status = 'scaling_back' # 'withdrawal' 'suspension' 'buying_time' 'scaling_back' 'digging_in' 
 
 """
     Data
@@ -96,27 +96,27 @@ cars_df = pd.DataFrame(columns=cars_info)
 
 for asset in assets_list:
 
-    plot_price_X_period(
-        X_asset = estimation_set[asset], 
-        X_Market = estimation_set[market_index], 
-        Y_date = estimation_set['date'], 
-        asset = asset
-    )
+    #plot_price_X_period(
+    #    X_asset = estimation_set[asset], 
+    #    X_Market = estimation_set[market_index], 
+    #    Y_date = estimation_set['date'], 
+    #    asset = asset
+    #)
 
     Y = estimation_returns[asset]
 
-    plot_return_X_period(
-        X_asset = X, 
-        X_Market = Y, 
-        Y_date = estimation_returns['date'], 
-        asset = asset
-    )
+    #plot_return_X_period(
+    #    X_asset = X, 
+    #    X_Market = Y, 
+    #    Y_date = estimation_returns['date'], 
+    #    asset = asset
+    #)
 
-    plot_market_X_asset(
-        Y_asset = X, 
-        X_Market = Y, 
-        asset = asset
-    )
+    #plot_market_X_asset(
+    #    Y_asset = X, 
+    #    X_Market = Y, 
+    #    asset = asset
+    #)
 
     model = sm.OLS(Y, X_sm)
     results = model.fit()
@@ -135,10 +135,10 @@ for asset in assets_list:
 
     results_df = results_df.append(outcome, ignore_index = True)
 
-    plot_residuals_dist(
-        res = results.resid,
-        asset = asset
-    )
+    #plot_residuals_dist(
+    #    res = results.resid,
+    #    asset = asset
+    #)
 
     print(results.summary())
 
